@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v2
         id: docker_build
         with:
-          context: ./web_crud/front_end
+          context: /web_crud/front_end
           file: ./Dockerfile
           builder: ${{steps.buildx.outputs.name}}
           push: true
