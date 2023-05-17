@@ -1,4 +1,4 @@
-name: VDT_Midterm
+name: VDT2023_Midterm
 on:
   push:
     branches: [ master ]
