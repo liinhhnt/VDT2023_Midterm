@@ -27,7 +27,6 @@ jobs:
         id: docker_build
         with:
           context: ./web_crud/front-end/
-          file: ./Dockerfile
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend
