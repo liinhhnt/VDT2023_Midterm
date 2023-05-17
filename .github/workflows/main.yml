@@ -1,8 +1,8 @@
 name: VDT2023_Midterm
-on: 
+on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   docker:
@@ -24,12 +24,25 @@ jobs:
       
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
-        id: docker_build
+        id: docker_build_frontend
         with:
           context: ./web_crud/front-end/
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend:${{ github.ref }}
+          
+      - name: Verify image front-end
+        run: echo ${{steps.docker_build_frontend.outputs.digest}}
+  
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v2
+        id: docker_build_backend
+        with:
+          context: ./web_crud/python/
+          builder: ${{steps.buildx.outputs.name}}
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-backend:${{ github.ref }}
 
-      - name: Verify
-        run: echo ${{steps.docker_build.outputs.digest}}
+      - name: Verify image back-end
+        run: echo ${{steps.docker_build_backend.outputs.digest}}
+    
