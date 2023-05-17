@@ -21,16 +21,21 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v1
         id: buildx 
-      
+        
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v2
+        with:
+          images: my-docker-hub-namespace/my-docker-hub-repository
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         id: docker_build_frontend
         with:
           context: ./web_crud/front-end/
           builder: ${{steps.buildx.outputs.name}}
-          # push: true
-          run: echo ${{steps.meta.outputs.tags}}
-          # tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend:$${{ steps.meta.outputs.tags }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
           
       - name: Verify image front-end
         run: echo ${{steps.docker_build_frontend.outputs.digest}}
@@ -41,9 +46,8 @@ jobs:
         with:
           context: ./web_crud/python/
           builder: ${{steps.buildx.outputs.name}}
-          # push: ${{ github.ref_type == 'tag' }}
-          run: echo ${{github.ref}}
-          # tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-backend:${{ steps.meta.outputs.tags }}
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-backend
 
       - name: Verify image back-end
         run: echo ${{steps.docker_build_backend.outputs.digest}}
