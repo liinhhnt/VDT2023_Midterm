@@ -37,7 +37,8 @@ jobs:
           context: ./web_crud/front-end/
           builder: ${{steps.buildx.outputs.name}}
           push: true
-          tags: ${{ steps.meta.outputs.tags[0] }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/vdt-frontend:${{ steps.meta.outputs.tags[0] }}
 
       - name: Verify image front-end
         run: echo ${{steps.docker_build_frontend.outputs.digest}}
@@ -49,7 +50,8 @@ jobs:
           context: ./web_crud/python/
           builder: ${{steps.buildx.outputs.name}}
           push: true
-          tags: ${{ steps.meta.outputs.tags[1] }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/vdt-backend:${{ steps.meta.outputs.tags[1] }}
 
       - name: Verify image back-end
         run: echo ${{steps.docker_build_backend.outputs.digest}}
