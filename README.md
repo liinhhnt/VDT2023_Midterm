@@ -1,4 +1,4 @@
-# Practice 2: Ansible <!-- omit in toc -->
+# Midterm Project <!-- omit in toc -->
 
 Author: **Nguyen Thi Linh**
 
@@ -13,24 +13,22 @@ Author: **Nguyen Thi Linh**
 - [6. Result and Conclusion](#6-result-and-conclusion)
 - [7. References](#7-references)
 
-# 1. Build a 3-tier web application
+# 0. Build a 3-tier web application
 ## Requirements
-Viết một CRUD web application đơn giản thực hiện các chức năng:
-- Liệt kê danh sách sinh viên tham gia khóa đào tạo chương trình VDT 2023 lĩnh
-vực cloud dưới dạng bảng (0.5đ)
-- Cho phép xem chi tiết/thêm/xóa/cập nhật thông tin sinh viên (0.5đ)
-Thiết kế hệ thống với ba dịch vụ: (0.5đ)
-- web: Giao diện web viết bằng HTML + CSS + Javascript được triển khai trên nền
-web server nginx
-- api: RESTful API viết bằng ngôn ngữ lập trình tùy chọn (prefer Python), có đầy
-đủ các chức năng: list, get, create, update, delete các bản ghi thông tin sinh viên
-- db: Database SQL hoặc NoSQL lưu trữ thông tin sinh viên (dữ liệu khởi tạo của
-DB này được cho bởi bảng trong Phụ lục I.)
+- Viết một CRUD web application đơn giản thực hiện các chức năng:
+  - Liệt kê danh sách sinh viên tham gia khóa đào tạo chương trình VDT 2023 lĩnh
+  vực cloud dưới dạng bảng (0.5đ)
+  - Cho phép xem chi tiết/thêm/xóa/cập nhật thông tin sinh viên (0.5đ)
+- Thiết kế hệ thống với ba dịch vụ: (0.5đ)
+  - web: Giao diện web viết bằng HTML + CSS + Javascript được triển khai trên nền
+  web server nginx
+  - api: RESTful API viết bằng ngôn ngữ lập trình tùy chọn (prefer Python), có đầy
+  đủ các chức năng: list, get, create, update, delete các bản ghi thông tin sinh viên
+  - db: Database SQL hoặc NoSQL lưu trữ thông tin sinh viên (dữ liệu khởi tạo của
+  DB này được cho bởi bảng trong Phụ lục I.)
 - Viết unit tests cho các chức năng APIs (0.5đ)
-Deploy the application in the docker-compose homework using ansible:
 
-- Set up docker for the target environments using role "common".
-- Split the application into 3 roles: "web", "api" and "db".
+##
 
 ## 2. Directory layout
   ```bash
