@@ -1,4 +1,4 @@
-name: test
+name: VDT_Midterm
 on:
   push:
     branches: [ master ]
