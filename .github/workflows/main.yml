@@ -1,11 +1,10 @@
-name: test-push
+name: test
 on:
   push:
-    branches: [master]
-
+    branches: [ master ]
 jobs:
   docker:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:
-      - name: Chechout
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
