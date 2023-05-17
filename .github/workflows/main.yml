@@ -1,0 +1,11 @@
+name: test-push
+on:
+  push:
+    branches: [master]
+
+jobs:
+  docker:
+    runs-on: unbuntu-latest
+    steps:
+      - name: Chechout
+      - uses: actions/checkout@v2
