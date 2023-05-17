@@ -41,6 +41,7 @@ jobs:
           context: ./web_crud/python/
           builder: ${{steps.buildx.outputs.name}}
           push: ${{ github.ref_type == 'tag' }}
+          run: echo ${{github.ref}}
           tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-backend:${{ steps.meta.outputs.tags }}
 
       - name: Verify image back-end
