@@ -30,7 +30,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{steps.buildx.outputs.name}}
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/VDT-frontend
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend
 
       - name: Verify
         run: echo ${{steps.docker_build.outputs.digest}}
