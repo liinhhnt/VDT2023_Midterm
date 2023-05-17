@@ -26,9 +26,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v2
         with:
-          images: my-docker-hub-namespace/my-docker-hub-repository
+          images: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend
+            
 
-      - name: Build and Push Docker Image
+      - name: Build and Push Docker Frontend Image
         uses: docker/build-push-action@v2
         id: docker_build_frontend
         with:
@@ -36,11 +37,11 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          
+
       - name: Verify image front-end
         run: echo ${{steps.docker_build_frontend.outputs.digest}}
   
-      - name: Build and Push Docker Image
+      - name: Build and Push Docker Backend Image
         uses: docker/build-push-action@v2
         id: docker_build_backend
         with:
