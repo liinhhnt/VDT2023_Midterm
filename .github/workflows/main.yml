@@ -29,7 +29,7 @@ jobs:
           context: ./web_crud/front-end/
           builder: ${{steps.buildx.outputs.name}}
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/vdt-frontend:${{ github.ref }}
 
       - name: Verify
         run: echo ${{steps.docker_build.outputs.digest}}
