@@ -42,7 +42,7 @@ Author: **Nguyen Thi Linh**
     python -m unittest unit_test.py
     ```
     Result: 
-    [!img](assets/run_unittest.png)
+   ![img](assets/run_unittest.png)
 
 ## 2. Directory layout
   ```bash
