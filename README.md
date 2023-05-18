@@ -37,7 +37,12 @@ Author: **Nguyen Thi Linh**
 - Unit test API (source code can be found in [here](/web_crud/test/):
   - I use `unittest` library of Flask to send requests.
   - Because of time limit, I have not created virtual database for test yet, so I use original database. To avoid modifying the DB, and ensuring that the APIs are testable independently of each other, I use the `Setup` function to create an instance model. After executing API test, `tearDown` function will automatically be called to delete these instances
-  - To run unittest, use command: `python -m unittest unit_test.py`
+  - To run unittest, use command: 
+    ```shell
+    python -m unittest unit_test.py
+    ```
+    Result: 
+    [!img](assets/run_unittest.png)
 
 ## 2. Directory layout
   ```bash
