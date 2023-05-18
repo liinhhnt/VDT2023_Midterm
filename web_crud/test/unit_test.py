@@ -1,8 +1,8 @@
 import unittest
 import requests
 
-URL_GET_ATTENDEE_BY_ID = "http://localhost:5000/getone"
-URL_COMMON = "http://localhost:5000"
+URL_GET_ATTENDEE_BY_ID = "http://localhost:5000/api/attendees/getone"
+URL_COMMON = "http://localhost:5000/api/attendees"
 
 
 class BaseTest(unittest.TestCase):

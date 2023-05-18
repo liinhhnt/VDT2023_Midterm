@@ -28,7 +28,21 @@ Author: **Nguyen Thi Linh**
   DB này được cho bởi bảng trong Phụ lục I.)
 - Viết unit tests cho các chức năng APIs (0.5đ)
 
-##
+## Output
+- The source code is contained in the [web_crud](/web_crud) directory, including 3 services:
+  - [front-end](/web_crud/front-end): contains the code for the interface, written in React.js and deployed on the web nginx server
+  - [python](/web_crud/python): Resful API written in Flask framework. Includes APIs:
+  - [mongodb](/web_crud/mongodb): NoSQL stores data of student information. Initialization data is stored in the file [attendees.csv](/web_crud/mongodb/attendees.csv), which is initialized via the command in the [init.sh](/web_crud/mongodb/init.sh) file
+
+- Unit test API (source code can be found in [here](/web_crud/test/):
+  - I use `unittest` library of Flask to send requests.
+  - Because of time limit, I have not created virtual database for test yet, so I use original database. To avoid modifying the DB, and ensuring that the APIs are testable independently of each other, I use the `Setup` function to create an instance model. After executing API test, `tearDown` function will automatically be called to delete these instances
+  - To run unittest, use command: 
+    ```shell
+    python -m unittest unit_test.py
+    ```
+    Result: 
+    [!img](assets/run_unittest.png)
 
 ## 2. Directory layout
   ```bash
