@@ -1,3 +1,8 @@
+- name: Update APT cache
+  become: true
+  apt:
+    update_cache: yes
+
 - name: Install aptitude
   apt:
     name: aptitude
