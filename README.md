@@ -124,4 +124,20 @@ Author: **Nguyen Thi Linh**
     ![img](assets/size-img.png)
 
 ## 2. Continuous Integration
+### Requirements
+- Tự động chạy unit test khi tạo PR vào branch main (0.5đ)
+- Tự động chạy unit test khi push commit lên một branch (0.5đ)
+### Output
+- File set up công cụ CI: [ci.yaml](.github/workflows/ci.yaml)
+  As I mentioned above, I have not mock database. So I must to run ansible-playbook first, to create database and server containers. My workflow is something like this:
+![img](assets/ci-flow.png) 
+
+- Demo CI successfully:
+![img](assets/CI-test.png)
+- Output log: [log.zip](output/logs/log-ci.zip)
+- Total time: approx 5 minutes
+
+- I recognize that when CI, I must run 2 steps: install ansible and run ansible-playbook. They take a long time (and resource, maybe). I try to run Ansible Playbook by Docker container follow [this tutorial](https://github.com/marketplace/actions/run-your-ansible-playbook-in-a-docker-container), but it failed. After debugging so much, I recognize that this tutorial so out of date.  It uses out-dated ubuntu base and consequently, I got error at step install Docker:
+![img](assets/test-fail.png)
+
 
