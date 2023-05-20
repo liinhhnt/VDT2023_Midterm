@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Ansible playbook
         run: |
-            ansible-playbook -i ansible/inventories/inventory.yaml ansible/site.yaml
+            ansible-playbook -i ansible/inventory/host.yaml ansible/site.yaml
 
       # - name: Run Ansible playbook
       #   uses: Hugozys/ansible-deploy@master
