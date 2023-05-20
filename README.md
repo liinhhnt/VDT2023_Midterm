@@ -141,7 +141,7 @@ Author: **Nguyen Thi Linh**
 ![img](assets/test-fail.png)
 
  - I found [another tutorial](https://github.com/marketplace/actions/run-ansible-playbook), still aiming to remove the "install ansible" step. And it seems to work better when the CI time has been reduced significantly (about 3 minutes)
- ![img](assets/log-ci-2)
+ ![img](assets/log-ci-2.png)
  Output log: [logs_ci_2.zip](output/log2/logs_ci_2/zip)
 
 
