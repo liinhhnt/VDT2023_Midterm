@@ -1,13 +1,13 @@
-- name: Update APT cache
+- name: Update APT cache and upgrade all packages
   become: true
   apt:
     update_cache: yes
-
-- name: Install aptitude
-  apt:
-    name: aptitude
-    state: latest
-    update_cache: false
+    upgrade: yes
+# - name: Install aptitude
+#   apt:
+#     name: aptitude
+#     state: latest
+#     update_cache: false
 
 - name: Install required system packages
   apt:
@@ -33,18 +33,23 @@
     repo: deb https://download.docker.com/linux/ubuntu jammy stable
     state: present
 
-- name: Update apt and install docker-ce
+- name: update apt
+  become: true
   apt:
-    name: docker-ce
-    state: latest
     update_cache: true
 
-# - name: Install Docker Engine, containerd, and Docker Compose 
+# - name: Update apt and install docker-ce
 #   apt:
-#     name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
-#     state: present
-#     become: yes
+#     name: docker-ce
+#     state: latest
 #     update_cache: true
+
+- name: Install Docker Engine, containerd, and Docker Compose 
+  become: true
+  apt:
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
+    state: present
+    update_cache: true
     
 - name: Install Docker Module for Python
   pip:

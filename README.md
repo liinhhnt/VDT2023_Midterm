@@ -13,8 +13,8 @@ Author: **Nguyen Thi Linh**
 - [6. Result and Conclusion](#6-result-and-conclusion)
 - [7. References](#7-references)
 
-# 0. Build a 3-tier web application
-## Requirements
+## 0. Build a 3-tier web application
+### Requirements
 - Viết một CRUD web application đơn giản thực hiện các chức năng:
   - Liệt kê danh sách sinh viên tham gia khóa đào tạo chương trình VDT 2023 lĩnh
   vực cloud dưới dạng bảng (0.5đ)
@@ -28,7 +28,7 @@ Author: **Nguyen Thi Linh**
   DB này được cho bởi bảng trong Phụ lục I.)
 - Viết unit tests cho các chức năng APIs (0.5đ)
 
-## Output
+### Output
 
 - Web application architecture:
   ![img](assets/app_archi.png)
@@ -58,13 +58,13 @@ Author: **Nguyen Thi Linh**
     Result: 
    ![img](assets/run_unittest.png)
 
-# 1. Containerization
+## 1. Containerization
 
-## Requirements
+### Requirements
 - Viết Dockerfile để đóng gói các dịch vụ trên thành các container image (0.5đ)
 - Yêu cầu image đảm bảo tối ưu thời gian build và kích thước chiếm dụng, khuyến khích sử dụng các thủ thuật build image đã được giới thiệu (layer-caching, optimized RUN instructions, multi-stage build, etc.) (0.5đ)
 
-## Output
+### Output
 - Dockerfile:
   - [frontend](/web_crud/front-end/Dockerfile)
   Build command:
@@ -123,5 +123,5 @@ Author: **Nguyen Thi Linh**
     - Docker images size:
     ![img](assets/size-img.png)
 
-# 2. Continuous Integration
+## 2. Continuous Integration
 
