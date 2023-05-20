@@ -36,7 +36,7 @@
 - name: update apt
   become: true
   apt:
-    update_cache: true
+    update_cache: yes
 
 # - name: Update apt and install docker-ce
 #   apt:
@@ -49,7 +49,7 @@
   apt:
     name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
     state: latest
-    update_cache: true
+    update_cache: yes
     
 - name: Install Docker Module for Python
   pip:
