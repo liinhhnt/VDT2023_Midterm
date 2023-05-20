@@ -40,7 +40,6 @@ jobs:
         env:
           cache-name: cache-dependencies
         with:
-          # npm cache files are stored in `~/.depend` on Linux/macOS
           path: ~/.depend
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
