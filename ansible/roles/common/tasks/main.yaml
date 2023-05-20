@@ -33,18 +33,18 @@
     repo: deb https://download.docker.com/linux/ubuntu jammy stable
     state: present
 
-# - name: Update apt and install docker-ce
-#   apt:
-#     name: docker-ce
-#     state: latest
-#     update_cache: true
-
-- name: Install Docker Engine, containerd, and Docker Compose 
+- name: Update apt and install docker-ce
   apt:
-    name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
-    state: present
-    become: yes
+    name: docker-ce
+    state: latest
     update_cache: true
+
+# - name: Install Docker Engine, containerd, and Docker Compose 
+#   apt:
+#     name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
+#     state: present
+#     become: yes
+#     update_cache: true
     
 - name: Install Docker Module for Python
   pip:

@@ -36,11 +36,16 @@ Author: **Nguyen Thi Linh**
 - The source code is contained in the [web_crud](/web_crud) directory, including 3 services:
   - [front-end](/web_crud/front-end): contains the code for the interface, written in React.js and deployed on the web nginx server
   - [python](/web_crud/python): Resful API written in Flask framework. Includes APIs:
-    - List all attendees (GET): `http://localhost:5000/api/attendees`
-    - Get information of a certain attendee (GET): `http://localhost:5000/api/attendees/getone/<id>`
-    - Create new attendee (POST): `http://localhost:5000/api/attendees`
-    - Update attendees (PUT): `http://localhost:5000/api/attendees/<id>`
-    - Delete attendees (DELETE): `http://localhost:5000/api/attendees/<id>`
+    - List all attendees (GET): 
+      `http://localhost:5000/api/attendees`
+    - Get information of a certain attendee (GET): 
+      `http://localhost:5000/api/attendees/getone/<id>`
+    - Create new attendee (POST): 
+      `http://localhost:5000/api/attendees`
+    - Update attendees (PUT): 
+      `http://localhost:5000/api/attendees/<id>`
+    - Delete attendees (DELETE): 
+      `http://localhost:5000/api/attendees/<id>`
   - [mongodb](/web_crud/mongodb): NoSQL stores data of student information. Initialization data is stored in the file [attendees.csv](/web_crud/mongodb/attendees.csv), which is initialized via the command in the [init.sh](/web_crud/mongodb/init.sh) file
 
 - Unit test API (source code can be found in [here](/web_crud/test/)):
@@ -96,15 +101,16 @@ Author: **Nguyen Thi Linh**
     By default, if we don't say anything, Docker will automatically look in the cache and during the build image, Docker will compare the cache with the Dockerfile and if there is a change at any layer then it won't cached again.
 
     In this project, because when we edit the code, layer `COPY . .` changed, so from then on it is no longer cached and the build image takes a long time.
-    [!img](assets/no-cache-layer.png)
+
+    ![img](assets/no-cache-layer.png)
 
     So if we arrange the components that change rarely (`npm install`) to the top and the components that change frequently (`COPY . .`) to the bottom, then the image build process will be significantly reduced.
     
     - Output build front-end image:
-    [!img](assets/cache-layer.png)
+    ![img](assets/cache-layer.png)
 
     - Output build back-end image:
-    [!img](assets/output-build-be.png)
+    ![img](assets/output-build-be.png)
 
   - Multi-stage build
     - Since nginx serve only static files, we need to build the data to render to the web first, by copying the necessary file (package, src, public...)
@@ -115,7 +121,7 @@ Author: **Nguyen Thi Linh**
     - By using multi-stage build, we only need one Dockerfile to optimize the image size. The final image contains only what is needed to run the application, minimizing the size compared to using two separate Dockerfiles.
 
     - Docker images size:
-    [!img](assets/size-img.png)
+    ![img](assets/size-img.png)
 
 # 2. Continuous Integration
 
