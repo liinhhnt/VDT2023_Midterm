@@ -35,7 +35,9 @@ jobs:
         with:
           playbook: site.yaml
           directory: ./ansible/
-          inventory: ansible/inventories/inventory.yaml
+          inventory: |
+            [all]
+            ansible/inventories/inventory.yaml
           vault_password: ${{secrets.VAULT_PASSWORD}}
           
       - name: Install dependencies
