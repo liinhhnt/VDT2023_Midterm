@@ -22,20 +22,22 @@ jobs:
         with:
           python-version: 3.9
     
-      - name: Install Ansible
-        run: |
-          pip install ansible
-
-      - name: Run Ansible playbook
-        run: |
-            ansible-playbook -i ansible/inventory/host.yaml ansible/site.yaml
+      # - name: Install Ansible
+      #   run: |
+      #     pip install ansible
 
       # - name: Run Ansible playbook
-      #   uses: Hugozys/ansible-deploy@master
-      #   with:
-      #     directory: "./ansible"
-      #     playbook: "site.yaml"
+      #   run: |
+      #       ansible-playbook -i ansible/inventory/host.yaml ansible/site.yaml
             
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: site.yaml
+          directory: ./ansible/
+          inventory: ansible/inventories/inventory.yaml
+          vault_password: ${{secrets.VAULT_PASSWORD}}
+          
       - name: Install dependencies
         run: pip install -r web_crud/test/requirements.txt
 

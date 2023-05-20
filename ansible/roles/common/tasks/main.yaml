@@ -3,11 +3,6 @@
   apt:
     update_cache: yes
     upgrade: yes
-# - name: Install aptitude
-#   apt:
-#     name: aptitude
-#     state: latest
-#     update_cache: false
 
 - name: Install required system packages
   apt:
@@ -37,13 +32,6 @@
   become: true
   apt:
     update_cache: yes
-
-# - name: Update apt and install docker-ce
-#   become: true
-#   apt:
-#     name: docker-ce
-#     state: latest
-#     update_cache: yes
 
 - name: Install Docker Engine, containerd, and Docker Compose 
   become: true
