@@ -26,12 +26,12 @@
 - name: Add Docker GPG apt Key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+    state: latest
 
 - name: Add Docker Repository
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu jammy stable
-    state: present
+    state: latest
 
 - name: update apt
   become: true
@@ -48,7 +48,7 @@
   become: true
   apt:
     name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
-    state: present
+    state: latest
     update_cache: true
     
 - name: Install Docker Module for Python
