@@ -223,3 +223,15 @@ Output log: [3.build-web.txt](output/3.build-web.txt)
   ![img](assets/cd-flow.png)
 
 File set up: [cd.yml](.github/workflows/cd.yml)
+
+Output build and push Docker Image to DockerHub:
+  ![img](assets/cd.png)
+Log: [cd-log.zip](output/logs/cd-log.zip)  
+
+First, I add tag to Docker Image by variable `${{  github.ref_name }}`. It success build and push image to DockerHub, but it is not attached tag 'latest`
+  ![img](assets/notag.png)
+
+Then, I follow [this tutorial](https://docs.docker.com/build/ci/github-actions/manage-tags-labels/), by extracting meta data, I can add tag to docker image and it's attached tag `latest' as well.
+![img](assets/taglatest.png)
+ 
+
