@@ -4,14 +4,12 @@ Author: **Nguyen Thi Linh**
 
 ## Table of Contents <!-- omit in toc -->
 
-- [0. Build a 3-tier web application](#1-build-a-3-tier-web-application)
+- [0. Build a 3-tier web application](#0-build-a-3-tier-web-application)
 - [1. Containerization](#1-containerization)
 - [2. Continuous Integration](#2-continuous-integration)
-- [3. Continuous Delivery ](#3-continuous-delivery)
-- [4. Monitoring](#4-monitoring)
-- [5. Logging](#5-logging)
-- [6. Result and Conclusion](#6-result-and-conclusion)
-- [7. References](#7-references)
+- [3. Continuous Delivery](#3-continuous-delivery)
+- [4. Result and Conclusion](#4-result-and-conclusion)
+- [5. References](#5-references)
 
 ## 0. Build a 3-tier web application
 ### Requirements
@@ -34,18 +32,18 @@ Author: **Nguyen Thi Linh**
   ![img](assets/app_archi.png)
 
 - The source code is contained in the [web_crud](/web_crud) directory, including 3 services:
-  - [front-end](/web_crud/front-end): contains the code for the interface, written in React.js and deployed on the web nginx server
-  - [python](/web_crud/python): Resful API written in Flask framework. Includes APIs:
+  - **Front-end**: The frontend is built on React framework. For the UI components, React-Bootstrap is used. It calls the API endpoints to show the Attendee records on the Table. Front end is deployed on the nginx server. The code for the frontend is in the folder [front-end](web_crud/front-end) of the repo.
+  - **Back-end and API**: The API is built on Flask framework using Python. It connects to the Mongo DB using Pymongo. The code for the frontend is in the folder [python](/web_crud/python) of the repo. The API is being served:
     - List all attendees (GET): 
-      `http://localhost:5000/api/attendees`
+     `http://localhost:5000/api/attendees`
     - Get information of a certain attendee (GET): 
-      `http://localhost:5000/api/attendees/getone/<id>`
+     `http://localhost:5000/api/attendees/getone/<id>`
     - Create new attendee (POST): 
-      `http://localhost:5000/api/attendees`
+     `http://localhost:5000/api/attendees`
     - Update attendees (PUT): 
-      `http://localhost:5000/api/attendees/<id>`
+     `http://localhost:5000/api/attendees/<id>`
     - Delete attendees (DELETE): 
-      `http://localhost:5000/api/attendees/<id>`
+     `http://localhost:5000/api/attendees/<id>`
   - [mongodb](/web_crud/mongodb): NoSQL stores data of student information. Initialization data is stored in the file [attendees.csv](/web_crud/mongodb/attendees.csv), which is initialized via the command in the [init.sh](/web_crud/mongodb/init.sh) file
 
 - Unit test API (source code can be found in [here](/web_crud/test/)):
@@ -144,4 +142,83 @@ Author: **Nguyen Thi Linh**
  ![img](assets/log-ci-2.png)
  Output log: [logs_ci_2.zip](output/log2/logs_ci_2/zip)
 
+## 3. Continuous Delivery
 
+### Deployment architecture and description:
+  See output of [0. Build a 3-tier web application](#1-build-a-3-tier-web-application)
+
+### Directory layout
+
+Source code architecture:
+  ```bash
+  ansible
+  .
+  ├── group_vars
+  │   └── all
+  │       ├── vars.yml
+  │       └── vault.yml
+  ├── inventories
+  │   └── inventory.yaml
+  ├── mongodb
+  │   ├── attendees.csv
+  │   └── init.sh
+
+  ├── roles
+  │   ├── be
+  │   │   ├── defaults
+  │   │   |   └── main.yaml
+  │   │   ├── tasks
+  │   │   |   └── main.yaml
+  │   ├── common
+  │   │   └── tasks
+  │   │       └── main.yaml
+  │   ├── db
+  │   │   ├── defaults
+  │   │   |   └── main.yaml
+  │   │   ├── tasks
+  │   │   |   └── main.yaml
+  │   └── fe
+  │       ├── defaults
+  │       |   └── main.yaml
+  │       └── tasks
+  │           └── main.yaml
+  └── site.yaml
+
+  ```
+
+- **`group_vars`**: This directory contains all the variable files for the playbook. In this case, we have a single group called "all" and two variable files for it: `vars.yml` and `vault.yml`. 
+  - `vars.yml`: contains all the common variables for the playbook
+  - `vault.yml`: contains the encrypted variables that should not be seen in plain text.
+
+- **`inventories`**: This directory contains all the inventory files for different environments. In this project, we only have one environment which is `inventory.yaml`. This file contains the list of hosts that we want to apply the playbook to.
+
+- **`mongodb`**: This directory contains the script files that we want to run in our playbook. In this case, we have `attendees.csv` and `init.sh`. These files are related to the database setup process in our playbook.
+
+- **`roles`**: This directory contains all the roles of the playbook. Each role includes the default variables in `defaults/main.yaml` and the tasks to be executed in `tasks/main.yaml`. 
+
+  - **`be`**: This role stands for "backend" and contains the files related to the Python backend setup process
+  
+  - **`common`**: This role contains the common tasks for installing Docker that are required for all roles to be executed successfully
+  
+  - **`db`**: This role stands for "database" and contains the files related to the MongoDB setup process
+  
+  - **`fe`**: This role stands for "frontend" and contains the files related to the Web server setup process
+  
+- **`site.yaml`**: This is the main playbook file that contains all the tasks that we want to execute in our playbook. This file includes the tasks from all the roles and also specifies the order in which the tasks should be executed.
+
+
+Run ansible playbook to deploy system by command:
+```shell
+$ ansible-playbook -i inventory.yml site.yml --ask-vault-pass
+Vault password: ...
+```
+Then enter vault password to connect to host.
+
+Output log: [3.build-web.txt](output/3.build-web.txt)
+
+### Set up CD
+
+CD flow:
+![img](assets/cd-flow.png)
+
+File set up: [cd.yml](.github/workflows/cd.yml)
