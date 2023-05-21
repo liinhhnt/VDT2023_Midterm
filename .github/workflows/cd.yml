@@ -28,13 +28,13 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/vdt-frontend
 
-      # - name: Cache Docker Image Layers
-      #   uses: actions/cache@v2
-      #   with: 
-      #     path: /tmp/.buildx-cache
-      #     key: ${{ runner.os }}-buildx-${{ github.sha}}
-      #     restore-key: |
-      #       ${{runner.os}}-buildx-
+      - name: Cache Docker Image Layers
+        uses: actions/cache@v2
+        with: 
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha}}
+          restore-key: |
+            ${{runner.os}}-buildx-
 
       - name: Build and Push Docker Frontend Image
         uses: docker/build-push-action@v2
@@ -44,8 +44,8 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta.outputs.tags}}
-          # cache-from: type=local,src=/tmp/.buildx-cache
-          # cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Verify image front-end
         run: echo ${{steps.docker_build_frontend.outputs.digest}}
@@ -64,8 +64,8 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta2.outputs.tags}}
-          # cache-from: type=local,src=/tmp/.buildx-cache
-          # cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Verify image back-end
         run: echo ${{steps.docker_build_backend.outputs.digest}}
