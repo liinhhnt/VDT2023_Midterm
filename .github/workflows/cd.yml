@@ -36,9 +36,7 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta.outputs.tags}}
-          # tags: ${{ secrets.DOCKERHUB_USERNAME }}/vdt-frontend:${{  github.ref_name }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta2
@@ -54,4 +52,5 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta2.outputs.tags}}
-       
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
