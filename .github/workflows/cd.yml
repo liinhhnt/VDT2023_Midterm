@@ -44,8 +44,8 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta.outputs.tags}}
-          # cache-from: type=local,src=/tmp/.buildx-cache
-          # cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Verify image front-end
         run: echo ${{steps.docker_build_frontend.outputs.digest}}
@@ -64,8 +64,8 @@ jobs:
           builder: ${{steps.buildx.outputs.name}}
           push: true
           tags: ${{ steps.meta2.outputs.tags}}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Verify image back-end
         run: echo ${{steps.docker_build_backend.outputs.digest}}
