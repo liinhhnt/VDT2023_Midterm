@@ -8,8 +8,6 @@ Author: **Nguyen Thi Linh**
 - [1. Containerization](#1-containerization)
 - [2. Continuous Integration](#2-continuous-integration)
 - [3. Continuous Delivery](#3-continuous-delivery)
-- [4. Result and Conclusion](#4-result-and-conclusion)
-- [5. References](#5-references)
 
 ## 0. Build a 3-tier web application
 ### Requirements
