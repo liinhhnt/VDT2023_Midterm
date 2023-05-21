@@ -22,6 +22,12 @@ jobs:
         uses: docker/setup-buildx-action@v2
         id: buildx 
 
+      - name: Extract metadata (tags, labels) for FE Image
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/vdt-frontend
+
       - name: Build and Push Docker Frontend Image
         uses: docker/build-push-action@v4
         id: docker_build_frontend
@@ -29,7 +35,8 @@ jobs:
           context: ./web_crud/front-end/
           builder: ${{steps.buildx.outputs.name}}
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/vdt-frontend:${{  github.ref_name }}
+          tags: ${{ steps.meta.outputs.tags}}
+          # tags: ${{ secrets.DOCKERHUB_USERNAME }}/vdt-frontend:${{  github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
