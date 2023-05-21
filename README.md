@@ -218,7 +218,8 @@ Output log: [3.build-web.txt](output/3.build-web.txt)
 
 ### Set up CD
 
-CD flow:
-![img](assets/cd-flow.png)
+  CD flow:
+
+  ![img](assets/cd-flow.png)
 
 File set up: [cd.yml](.github/workflows/cd.yml)
